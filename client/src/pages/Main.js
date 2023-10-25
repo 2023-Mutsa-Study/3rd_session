@@ -1,26 +1,53 @@
 import axios from "axios";
-import { useState } from "react";
-const introductions = {
-  _id: "653921d27859579657f0c881",
-  postName: "김준서",
-  introduction: "성균관대학교 통계학과 19학번 멋쟁이사자처럼 회장",
-  postTime: "2023-10-25T14:10:26.512Z",
-};
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 const Main = () => {
   const [data, setData] = useState();
-  axios
-    .get("http://localhost:8000/introduce")
-    .then((response) => {
-      console.log(response);
-      setData(response);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  const navigate = useNavigate();
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/introduce")
+      .then((response) => {
+        console.log(response.data.introductions);
+        setData(response.data.introductions);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  const navigateToDetail = (id) => {
+    navigate(`/${id}`);
+  };
+  const navigateToForm = () => {
+    navigate("/form");
+  };
+
   return (
     <>
-      <h1>방명록</h1>
-      <table></table>
+      <h1>자기소개</h1>
+      <button
+        style={{ margin: "20px", width: "100px", height: "40px" }}
+        onClick={navigateToForm}
+      >
+        글작성
+      </button>
+      <table border={"1px"} width={"100%"}>
+        <tbody>
+          <tr>
+            <th>번호</th>
+            <th>작성자</th>
+          </tr>
+          {data &&
+            data.map((item, index) => {
+              return (
+                <tr key={index} onClick={() => navigateToDetail(item._id)}>
+                  <td>{index + 1}</td>
+                  <td>{item.postName}</td>
+                </tr>
+              );
+            })}
+        </tbody>
+      </table>
     </>
   );
 };
