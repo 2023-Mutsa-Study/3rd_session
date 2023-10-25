@@ -1,4 +1,5 @@
 const express = require("express"); //express 사용
+const cors = require("cors");
 const app = express(); // 앱 생성
 const port = 8000; //포트번호 설정
 
@@ -18,6 +19,11 @@ mongoose
   })
   .then(() => console.log("MongoDB Connected...")) // 연결될 경우에 던져주기
   .catch((err) => console.log(err)); //에러를 출력
+
+
+app.use(cors({
+  origin: 'http://localhost:3000',
+}));
 
 app.use(express.json());
 
