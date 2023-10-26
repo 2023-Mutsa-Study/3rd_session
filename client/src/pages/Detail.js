@@ -46,12 +46,21 @@ const Detail = () => {
       });
   }, [post_id]);
   return (
-    <>
-      <h1>{data.postName}</h1>
-      <h3>{data.introduction}</h3>
-      <p>{data.postTime}</p>
+    <div className="border">
+      <div className="detail postName">
+        <h4 className="cate">작성자</h4>
+        <p>{data.postName}</p>
+      </div>
+      <div className="detail intro">
+        <h4 className="cate">자기소개</h4>
+        <p>{data.introduction}</p>
+      </div>
+      <div className="detail time">
+        <h4>작성 시간</h4>
+        <p>{data.postTime}</p>
+      </div>
       {token.includes(post_id) || token === post_id ? (
-        <>
+        <div className="detail button">
           <button
             style={{ margin: "20px", width: "100px", height: "40px" }}
             onClick={navigateToUpdate}
@@ -64,7 +73,7 @@ const Detail = () => {
           >
             삭제
           </button>
-        </>
+        </div>
       ) : (
         <></>
       )}
@@ -75,7 +84,7 @@ const Detail = () => {
       >
         Home
       </button>
-    </>
+    </div>
   );
 };
 
