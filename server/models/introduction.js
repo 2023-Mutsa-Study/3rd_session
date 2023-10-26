@@ -11,9 +11,13 @@ const introSchema = Schema({
         type: String,
         minlength: 5,
         required: true
+    },
+    postTime: {
+        type: String,
+        default: () => new Date().toLocaleString("ko-KR", { timeZone: "Asia/Seoul" })
     }
 }, {versionKey: false});
 
-introSchema.set("timestamps", {createdAt: 'postTime', updatedAt: false});
+introSchema.set("timestamps", {updatedAt: false});
 
 module.exports = mongoose.model('Introduction', introSchema);   

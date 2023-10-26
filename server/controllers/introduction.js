@@ -10,6 +10,20 @@ exports.getFetchIntroduction = (req, res, next) => {
     .catch((err) => next(err));
 };
 
+// async/await 문법을 이용한 위와 같은 기능을 하는 코드
+exports.getFetchIntroductionWithAsyncAwait = async (req, res, next) => {
+  try {
+    const intros = await Introduction.find();
+
+    return res.status(200).json({
+              introductions: intros,
+            });
+  }
+  catch (err) {
+    next(err);
+  }
+};
+
 exports.postIntroduction = (req, res, next) => {
   const pName = req.body.postName;
   const intro = req.body.introduction;
