@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 const Main = () => {
   const [data, setData] = useState();
   const navigate = useNavigate();
+
   useEffect(() => {
     axios
       .get("http://localhost:8000/introduce")
@@ -15,6 +16,21 @@ const Main = () => {
         console.log(error);
       });
   }, []);
+
+  // ****** async await 사용
+  // useEffect(() => {
+  //   async function getAllData() {
+  //     try {
+  //       const response = await axios.get("http://localhost:8000/introduce");
+  //       console.log(response);
+  //       setData(response.data.introductions);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  //   getAllData();
+  // }, []);
+
   const navigateToDetail = (id) => {
     navigate(`/${id}`);
   };
