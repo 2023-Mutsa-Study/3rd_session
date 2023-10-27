@@ -9,7 +9,7 @@ const Main = () => {
     axios
       .get("http://localhost:8000/introduce")
       .then((response) => {
-        console.log(response.data.introductions);
+        console.log(response);
         setData(response.data.introductions);
       })
       .catch((error) => {

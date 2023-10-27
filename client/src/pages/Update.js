@@ -13,6 +13,7 @@ const Update = () => {
     axios
       .get(`http://localhost:8000/introduce/${post_id}`)
       .then((response) => {
+        console.log(response);
         setName(response.data.postName);
         setIntro(response.data.introduction);
       })
