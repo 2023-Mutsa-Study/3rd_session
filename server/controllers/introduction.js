@@ -85,7 +85,7 @@ exports.updateIntroduction = (req, res, next) => {
     intro
       .save()
       .then((result) => {
-        return res.status(201).json({
+        return res.status(200).json({
           postId: intro._id,
         });
       })
